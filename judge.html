@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<script type="text/javascript">
+    //第一种方法  
+    var bForcepc = fGetQuery("dv") == "pc";//PC端
+    function fBrowserRedirect(){  
+        var sUserAgent = navigator.userAgent.toLowerCase();  
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";//ipad 
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";//iphone
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";//移动设备
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";//  
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";//ucweb浏览器
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";//android
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";  //windows ce移动系统
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";//windows mobile
+
+        if(bIsIpad){  
+            var sUrl = location.href;      
+            if(!bForcepc){
+                //window.location.href = "ipad";
+                alert("iPad");
+                return true;  
+            }  
+        }  
+        if(bIsIphoneOs || bIsAndroid){  
+            var sUrl = location.href;      
+            if(!bForcepc){  
+                //window.location.href = "smart"; 
+                alert("ios and android");
+                return true;
+            }  
+        }  
+        if(bIsMidp||bIsUc7||bIsUc||bIsCE||bIsWM){  
+            var sUrl = location.href;      
+            if(!bForcepc){  
+                //window.location.href = "m"; 
+                alert("ucweb浏览器等等");
+                return true;
+            }
+        }
+        else{
+            alert("pc");
+            return true;
+        }  
+    }
+
+    function fGetQuery(name){//获取参数值  
+        var sUrl = window.location.search.substr(1);  
+        var r = sUrl.match(new RegExp("(^|&)" + name + "=([^&]*)(&|$)"));  
+        return (r == null ? null : (r[2]));  
+    }  
+    function fShowVerBlock(){     
+        if(bForcepc){  
+            document.getElementByIdx_x("dv_block").style.display = "block";  
+        }  
+        else{  
+            document.getElementByIdx_x("ad_block").style.display = "block";  
+        }  
+    }  
+    fBrowserRedirect();  
+
+
+    //第二种方法
+    /*if(/AppleWebKit.*mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+    if(window.location.href.indexOf("?mobile")<0){
+        try{
+            if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+                //window.location.href="手机页面";
+                alert("手机页面");
+            }else if(/iPad/i.test(navigator.userAgent)){
+                //window.location.href="平板页面";
+                alert("平板页面");
+            }else{
+                //window.location.href="其他移动端页面"
+                alert("windows");
+            }
+        }catch(e){}
+    }
+}*/
+</script>
+  </head>
+  <body>
+  	<img src="tttt.png" style="width:100px;height:100px;"/>
+  </body>
+</html>
